@@ -13,15 +13,30 @@
   }
 }
 
+header .subreddit_input {
+  /* display: inline-block; */
+  /* color: #F3F3F3; */
+  /* font-size: 32px; */
+  /* font-weight: 600; */
+  /* font-style: italic; */
+  /* text-transform: uppercase; */
+  font-size: 50px;
+  background: none;
+  border: none;
+  outline: none;
+  appearance: none;
+  color: black;
+}
+
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
 }
 
 .App-link {
