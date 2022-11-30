@@ -199,7 +199,7 @@ function Test() {
     <div>
       <br/>
       <div style={{backgroundColor:"lightgreen",padding:"5px"}}>
-      <input type="text" value={name} onChange={(e)=>{setName(e.target.value)}} placeholder='Please add your name to start evalutaion' />
+      <input type="text" value={name} onChange={(e)=>{setName(e.target.value)}} placeholder='Please add your name to start evaluation' />
 
       </div>
 
