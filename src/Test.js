@@ -211,7 +211,7 @@ function Test() {
       </p>
       <br/>
       <p>
-        After finishing annoation please click this link to Download :      <CSVLink data={notation}>Generate Report</CSVLink>;
+        After finishing annotation please click this link to Download :      <CSVLink data={notation}>Generate Report</CSVLink>;
       </p>
 
   
