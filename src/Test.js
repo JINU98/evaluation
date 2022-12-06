@@ -43,20 +43,41 @@ function Test() {
   console.log("notation",notation)
 
   const rightclicked =(e,index,type,value,post)=>{
-    e.target.style.backgroundColor="green";
+
+
+  
+
     addEvaluation(index,type,value,post)
+
+    setData(data.filter((v,i)=>{
+      if(i!=index){
+        return v
+      }
+    }))
+    // e.target.style.backgroundColor="green";
 
   }
 
   const wrongclicked=(e,index,type,value,post)=>{
-    e.target.style.backgroundColor="black"
+  
+  
     addEvaluation(index,type,value,post)
+
+    setData(data.filter((v,i)=>{
+      if(i!=index){
+        return v
+      }
+    }))
+
+    // e.target.style.backgroundColor="black";
 
   }
 
     const handleAgree=(e,index,type,value,post)=>{
       e.target.style.backgroundColor="green";
     addEvaluation(index,type,value,post)
+
+
 
 
     }
@@ -80,10 +101,10 @@ function Test() {
       return "Indication or None"
     }
     if(type == "2"){
-      return "Ideation type 1"
+      return "Ideation"
     }
     if(type == "3"){
-      return "Ideation type 2"
+      return "Ideation"
     }
     if(type == "4"){
       return "Behavourial or attempt"
@@ -203,17 +224,49 @@ function Test() {
 
       </div>
 
-      <header className="main">
+      <header>
     <br/>
     <br/>
     <p>
-       Also Please make sure to add your name before you start to evaluate.
-      </p>
+      Guidelines for evaluation:
       <br/>
-      <p>
-        After finishing annotation please click this link to Download :      <CSVLink data={notation}>Generate Report</CSVLink>;
-      </p>
+      <br/>
 
+      <ol>
+        <li>
+          <p>
+            Add your name in the green higlighted bar as Step 1.
+          </p>
+        </li>
+        <li>
+          <p>
+            Read the reddit posts and click on agree or disagree if you think the particular concept is present in the given concept color codes as the model higlightens.
+          </p>
+        </li>
+        <li>
+          <p>
+            Click on the &nbsp;<img style={{cursor:"pointer"}} width={"35"} src="https://cdn-icons-png.flaticon.com/512/5290/5290119.png" alt="" />&nbsp; if you think the given inference is correct.
+            Click on the &nbsp;<img style={{cursor:"pointer"}} width={"35"} src="https://cdn-icons-png.flaticon.com/512/7698/7698976.png" alt="" />&nbsp; if you think the given inference is incorrect.
+
+
+          </p>
+        </li>
+        <li>
+          <p>
+            Continue till the list is exhausted.
+          </p>
+        </li>
+      <li>
+        <p>
+    <b>  After finishing annotation please click this link to        <CSVLink data={notation}>Generate Report</CSVLink>;</b>
+          
+        </p>
+      </li>
+      </ol>
+    
+
+      </p>
+    
   
         
         <h1>r/<input class="subreddit_input" onChange={e => setsubreddit(e.target.value)} value={subreddit} /></h1>
@@ -238,7 +291,7 @@ function Test() {
           
           <div style={{display:"flex",gap:"10px"}}>
           <div>
-					<h3> Post #{index+1} </h3> 
+					<h3> Post #{data.length-index} </h3> 
           </div>
 
           <div>
@@ -249,34 +302,7 @@ function Test() {
 }
       
             </div>
-            <div>
-            <p style={{backgroundColor:"#f56a6a",color:'white',margin:"1px",padding:"5px",fontSize:"12px",borderRadius:"10px"}} >
-            {displayInference(inferences[index])}
-
-
-          </p>
-
-         
-            </div>
-            <div style={{display:"flex",margin:"0 10px",gap:"30px",alignContent:"center"}}>
-
-            <div>
-            {/* <p style={{backgroundColor:"white",color:'black',margin:"1px",padding:"5px",fontSize:"12px",borderRadius:"10px"}} >  </p> */}
-          
-           <img onClick={(e)=>{rightclicked(e,index,"annotation","correct",value)}} ref={myRef1} style={{cursor:"pointer"}} width={"35"} src="https://cdn-icons-png.flaticon.com/512/5290/5290119.png" alt="" />
-
-         
-            </div>
-          <div> 
-
-          <img width={"35"} onClick={(e)=>{wrongclicked(e,index,"annotation","incorrect",value)}} ref={myRef1} style={{cursor:"pointer"}} src="https://cdn-icons-png.flaticon.com/512/7698/7698976.png" alt="" />
-
-
-          </div>
-
-
-        
-          </div>
+            
          
         
 
@@ -309,6 +335,38 @@ function Test() {
         }
 
             {/* {annotations[index]} */}
+
+            <div>
+        
+
+         
+            </div>
+            <div style={{display:"flex",margin:"2vh 0px",gap:"30px",alignContent:"center"}}>
+
+            {/* <br/> */}
+            <p style={{backgroundColor:"#f56a6a",color:'white',margin:"1px",padding:"5px",fontSize:"12px",borderRadius:"10px"}} >
+            {displayInference(inferences[index])}
+
+
+          </p>
+
+            <div>
+            {/* <p style={{backgroundColor:"white",color:'black',margin:"1px",padding:"5px",fontSize:"12px",borderRadius:"10px"}} >  </p> */}
+          
+           <img onClick={(e)=>{rightclicked(e,index,"annotation","correct",value)}} ref={myRef1} style={{cursor:"pointer"}} width={"35"} src="https://cdn-icons-png.flaticon.com/512/5290/5290119.png" alt="" />
+
+         
+            </div>
+          <div> 
+
+          <img width={"35"} onClick={(e)=>{wrongclicked(e,index,"annotation","incorrect",value)}} ref={myRef1} style={{cursor:"pointer"}} src="https://cdn-icons-png.flaticon.com/512/7698/7698976.png" alt="" />
+
+
+          </div>
+
+
+        
+          </div>
 
            <p> <br/> <a href="#" target="_blank" className="button fit"><i className="fa fa-comments" aria-hidden="true"></i> Comments</a> </p> <hr className="major" /> </span>
            
