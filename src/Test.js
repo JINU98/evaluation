@@ -28,6 +28,9 @@ function Test() {
     cursor:"pointer"
   }
 
+
+  
+
   const addEvaluation =(index,type,value,post)=>{
     const a={};
     if(type="annotation")
@@ -40,7 +43,7 @@ function Test() {
    setNotation([...notation,a])
   }
 
-  console.log("notation",notation)
+  // console.log("notation",notation)
 
   const rightclicked =(e,index,type,value,post)=>{
 
@@ -50,6 +53,18 @@ function Test() {
     addEvaluation(index,type,value,post)
 
     setData(data.filter((v,i)=>{
+      if(i!=index){
+        return v
+      }
+    }))
+
+     setInferences(inferences.filter((v,i)=>{
+      if(i!=index){
+        return v
+      }
+    }))
+
+     setAnnotations(annotations.filter((v,i)=>{
       if(i!=index){
         return v
       }
@@ -64,6 +79,18 @@ function Test() {
     addEvaluation(index,type,value,post)
 
     setData(data.filter((v,i)=>{
+      if(i!=index){
+        return v
+      }
+    }))
+
+     setInferences(inferences.filter((v,i)=>{
+      if(i!=index){
+        return v
+      }
+    }))
+
+     setAnnotations(annotations.filter((v,i)=>{
       if(i!=index){
         return v
       }
@@ -328,9 +355,9 @@ function Test() {
               <p>
                 Do you agree with this evalution of cssrs concepts : 
               </p>
-              <button onClick={(e)=>{ handleAgree(e,index,"concept","agree",value) }}>Agree</button>
+              <button  onClick={(e)=>{ handleAgree(e,index,"concept","agree",value) }}>Agree</button>
               &nbsp; &nbsp;
-              <button onClick={(e)=>{ handleDisAgree(e,index,"concept","disagree",value) }}>Disagree</button>
+              <button  onClick={(e)=>{ handleDisAgree(e,index,"concept","disagree",value) }}>Disagree</button>
             </div>
         }
 
@@ -368,7 +395,9 @@ function Test() {
         
           </div>
 
-           <p> <br/> <a href="#" target="_blank" className="button fit"><i className="fa fa-comments" aria-hidden="true"></i> Comments</a> </p> <hr className="major" /> </span>
+           {/* <p> <br/> <a href="#" target="_blank" className="button fit"><i className="fa fa-comments" aria-hidden="true"></i> Comments</a> </p>  */}
+           <hr className="major" /> 
+           </span>
            
            } 
 
