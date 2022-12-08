@@ -43,7 +43,6 @@ function Test() {
    setNotation([...notation,a])
   }
 
-  // console.log("notation",notation)
 
   const rightclicked =(e,index,type,value,post)=>{
 
@@ -52,21 +51,30 @@ function Test() {
 
     addEvaluation(index,type,value,post)
 
-    setData(data.filter((v,i)=>{
+    setData(data.map((v,i)=>{
       if(i!=index){
         return v
       }
-    }))
+      else{
 
-     setInferences(inferences.filter((v,i)=>{
-      if(i!=index){
-        return v
       }
     }))
 
-     setAnnotations(annotations.filter((v,i)=>{
+     setInferences(inferences.map((v,i)=>{
       if(i!=index){
         return v
+      }
+      else{
+
+      }
+    }))
+
+     setAnnotations(annotations.map((v,i)=>{
+      if(i!=index){
+        return v
+      }
+      else{
+
       }
     }))
     // e.target.style.backgroundColor="green";
@@ -101,7 +109,7 @@ function Test() {
   }
 
     const handleAgree=(e,index,type,value,post)=>{
-      e.target.style.backgroundColor="green";
+      // e.target.classList.toggle("test");
     addEvaluation(index,type,value,post)
 
 
@@ -110,7 +118,7 @@ function Test() {
     }
 
     const handleDisAgree=(e,index,type,value,post)=>{
-      e.target.style.backgroundColor="black"
+      // e.target.classList.toggle("test")
       addEvaluation(index,type,value,post)
     }
 
@@ -150,7 +158,6 @@ function Test() {
         // let html = ansi_up.ansi_to_html(val);
         // console.log("html",html)
         // return console.log(val[2])
-        console.log("value index",val,ind)
         
           if(val==null){
             html.push(" ")
@@ -165,7 +172,6 @@ function Test() {
         
         
       })
-      console.log("html",html)
       setAnnotations(html)
       setInferences(infer)
 
@@ -183,7 +189,6 @@ function Test() {
               // let html = ansi_up.ansi_to_html(val);
               // console.log("html",html)
               // return console.log(val[2])
-              console.log("value index",val,ind)
               
                 if(val==null){
                   html.push(" ")
@@ -198,7 +203,6 @@ function Test() {
               
               
             })
-            console.log("html",html)
             setAnnotations(html.map((value,index)=>{
               return value.replaceAll("span","div")
             }))
@@ -235,11 +239,9 @@ function Test() {
     // )
 
     setData(examples.slice(0,200).map((val,index)=>{return val["Sentence"]}))
-    // console.log("i",inference)
     handleInferences(inference)
     // setInferences(inference)
     // handlePosts(JSON.stringify(examples.slice(0,200).map((val,index)=>{return val["Sentence"]}),null,"||"))
-    console.log("csv",JSON.stringify(examples.slice(0,200).map((val,index)=>{return val["Sentence"]}),null,"||"))
   }, [subreddit]);
 
 
@@ -254,7 +256,7 @@ function Test() {
       <header>
     <br/>
     <br/>
-    <p>
+    <div>
       Guidelines for evaluation:
       <br/>
       <br/>
@@ -292,11 +294,11 @@ function Test() {
       </ol>
     
 
-      </p>
+      </div>
     
   
         
-        <h1>r/<input class="subreddit_input" onChange={e => setsubreddit(e.target.value)} value={subreddit} /></h1>
+        <h1>r/<input className="subreddit_input" onChange={e => setsubreddit(e.target.value)} value={subreddit} /></h1>
 
 
 				</header>
@@ -307,103 +309,44 @@ function Test() {
 
         {data.map((value,index)=>{
 
-        //  return console.log(value?.data?.selftext)
+       
 
-        return <div key={index} style={{margin:"0 auto",width:"100%"}}>
-
-        {/* { <span> Posted by : <strong> u/{value?.data?.author}</strong> &nbsp;<span> {value.data.author_flair_text}</span> </span>  } <span> {value?.data?.author_flair_text?.includes("Moderator")== true ? <i className="fa fa-star" style={{color:"red"}} aria-hidden="true"></i>: null   }  </span> */}
-      
-        { <span> Posted by : <strong> u/reddit_user  </strong>  </span>}
+        return (
         
-          
-          <div style={{display:"flex",gap:"10px"}}>
-          <div>
-					<h3> Post #{data.length-index} </h3> 
-          </div>
-
-          <div>
-            {
-          // <p style={{backgroundColor:"grey",color:'white',margin:"1px",padding:"5px",fontSize:"12px",borderRadius:"10px"}} >{value.data.link_flair_text}</p>
-          // <p style={{backgroundColor:"grey",color:'white',margin:"1px",padding:"5px",fontSize:"12px",borderRadius:"10px"}} >{value}</p>
-
-}
-      
-            </div>
+        
+        <div key={index} style={{margin:"0 auto",width:"100%"}}>
+         <span> Posted by : <strong> u/reddit_user  </strong>  </span>
+          <div><h3> Post #{data.length-index} </h3> </div> 
+          <div><p>{value}</p></div>  
             
-         
-        
-
-          </div>
+            <div style={{color:"white"}} dangerouslySetInnerHTML={{__html: annotations[index+1] } } ></div>
+           
+           
+           { 
+          
+          annotations[index+1] ==" " ? null:
+           <div>
+            
+            <br/>
               
-          {/* <div>
-            <source src={value?.data?.media?.scrubber_media_url} 
-            width="640" height="480" frameborder="0" allowfullscreen>
-          </source>
-          </div> */}
-
-              {/* <img src={value?.data?.thumbnail} style={{height: "200px"}} alt="" /> */}
-
-          {
-          <span> 
-            {value}
-
-            <br/>
-            <br/>
-            <div style={{color:"white",display:"inline-block"}} dangerouslySetInnerHTML={{__html: annotations[index+1] } } ></div>
-           {  annotations[index+1] ==" " ? "":
-            <div>
-              <p>
-                Do you agree with this evalution of cssrs concepts : 
-              </p>
+              <p>Do you agree with this evalution of cssrs concepts :</p>
+            
               <button  onClick={(e)=>{ handleAgree(e,index,"concept","agree",value) }}>Agree</button>
               &nbsp; &nbsp;
               <button  onClick={(e)=>{ handleDisAgree(e,index,"concept","disagree",value) }}>Disagree</button>
             </div>
         }
 
-            {/* {annotations[index]} */}
-
-            <div>
-        
-
-         
-            </div>
             <div style={{display:"flex",margin:"2vh 0px",gap:"30px",alignContent:"center"}}>
 
-            {/* <br/> */}
-            <p style={{backgroundColor:"#f56a6a",color:'white',margin:"1px",padding:"5px",fontSize:"12px",borderRadius:"10px"}} >
-            {displayInference(inferences[index])}
-
-
-          </p>
-
-            <div>
-            {/* <p style={{backgroundColor:"white",color:'black',margin:"1px",padding:"5px",fontSize:"12px",borderRadius:"10px"}} >  </p> */}
-          
-           <img onClick={(e)=>{rightclicked(e,index,"annotation","correct",value)}} ref={myRef1} style={{cursor:"pointer"}} width={"35"} src="https://cdn-icons-png.flaticon.com/512/5290/5290119.png" alt="" />
-
-         
-            </div>
-          <div> 
-
-          <img width={"35"} onClick={(e)=>{wrongclicked(e,index,"annotation","incorrect",value)}} ref={myRef1} style={{cursor:"pointer"}} src="https://cdn-icons-png.flaticon.com/512/7698/7698976.png" alt="" />
-
-
+           <div><p style={{backgroundColor:"#f56a6a",color:'white',margin:"1px",padding:"5px",fontSize:"12px",borderRadius:"10px"}} >{displayInference(inferences[index])}</p></div>
+          <div> <img onClick={(e)=>{rightclicked(e,index,"annotation","correct",value)}} ref={myRef1} style={{cursor:"pointer"}} width={"35"} src="https://cdn-icons-png.flaticon.com/512/5290/5290119.png" alt="" /> </div>
+          <div> <img width={"35"} onClick={(e)=>{wrongclicked(e,index,"annotation","incorrect",value)}} ref={myRef1} style={{cursor:"pointer"}} src="https://cdn-icons-png.flaticon.com/512/7698/7698976.png" alt="" /> </div>
           </div>
 
-
-        
-          </div>
-
-           {/* <p> <br/> <a href="#" target="_blank" className="button fit"><i className="fa fa-comments" aria-hidden="true"></i> Comments</a> </p>  */}
            <hr className="major" /> 
-           </span>
-           
-           } 
-
-   
-
-        </div>
+      
+        </div>)
         
       
         })}  

@@ -23,6 +23,11 @@ section, summary, time, mark, audio, video {
   font: inherit;
   vertical-align: baseline; }
 
+.test{
+  background-color:rgb(245, 106, 106);
+  color: white !important;
+}
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block; }
@@ -1513,12 +1518,14 @@ button,
   input[type="submit"]:hover,
   input[type="reset"]:hover,
   input[type="button"]:hover,
-  button:hover,
+  /* button:hover,
   .button:hover {
-    background-color: rgba(245, 106, 106, 0.05); }
+    background-color: rgba(245, 106, 106, 0.05); } */
   input[type="submit"]:active,
   input[type="reset"]:active,
   input[type="button"]:active,
+
+
   button:active,
   .button:active {
     background-color: rgba(245, 106, 106, 0.15); }
